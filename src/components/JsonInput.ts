@@ -13,14 +13,14 @@ export const JsonInput:FunctionalComponent<QFieldProps> = (props:QFieldProps, ct
         floatingLabel, emitValue, modelValue, id, editable,
       }]: Parameters<QFieldSlots['control']>
     ) => floatingLabel && h(
-      JsonEditorVue,
+      [JsonEditorVue],
       {
         id,
         modelValue,
         mode: 'text',
         mainMenuBar: false,
         readOnly: !editable,
-        'onUpdate:modelValue': (v) => {
+        'onUpdate:modelValue': (v:any) => {
           if (typeof v === 'string') {
             emitValue(JSON.parse(v));
           } else {

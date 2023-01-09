@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { JsonInput } from 'components/JsonInput.js';
+import { JsonInput } from 'components/JsonInput';
 
 export default defineComponent({
   components: { JsonInput },

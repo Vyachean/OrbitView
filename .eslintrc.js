@@ -1,3 +1,4 @@
+
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file
@@ -59,7 +60,7 @@ module.exports = {
     __QUASAR_SSR_PWA__: 'readonly',
     process: 'readonly',
     Capacitor: 'readonly',
-    chrome: 'readonly'
+    chrome: 'readonly',
   },
 
   // add your custom rules here
@@ -74,7 +75,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'error',
 
     'import/first': 'off',
-    'import/named': 'error',
     'import/namespace': 'error',
     'import/default': 'error',
     'import/export': 'error',
@@ -82,6 +82,10 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
+
+    // The core 'import/named' rules
+    // does not work with type definitions
+    'import/named': 'off',
 
     'prefer-promise-reject-errors': 'off',
 
