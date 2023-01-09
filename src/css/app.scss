@@ -1,0 +1,32 @@
+// app global css in SCSS form
+
+@use "sass:map";
+@import "spacingVariables";
+
+$gap-list: (
+  "none": $space-none,
+  "xs":   $space-xs,
+  "sm":   $space-sm,
+  "md":   $space-md,
+  "lg":   $space-lg,
+  "xl":   $space-xl,
+);
+
+.gap {
+  @each $name, $v in $gap-list {
+    &-#{$name} {
+      row-gap: map.get($v, "x");
+      column-gap: map.get($v, "y");
+    }
+    &-x-#{$name} {
+      column-gap: map.get($v, "x");
+    }
+    &-y-#{$name} {
+      row-gap: map.get($v, "y");
+    }
+  }
+}
+
+.grid-full-width {
+  grid-column: 1 / end;
+}
