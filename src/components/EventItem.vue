@@ -42,6 +42,7 @@ import JsonEditorVue from 'json-editor-vue';
 
 export interface PropEventItem {
   name: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any
 }
 

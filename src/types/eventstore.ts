@@ -18,5 +18,8 @@ export interface EventStoreInstance extends StoreInstance {
   iterator: IteratorFunction
 }
 
-export const isEventStoreInstance = (v:any):v is EventStoreInstance => isStoreInstance(v)
+export const isEventStoreInstance = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  v:any,
+):v is EventStoreInstance => isStoreInstance(v)
   && v.type === 'eventlog';

@@ -8,7 +8,10 @@ export interface FeedStoreInstance extends StoreInstance {
    * Returns a Promise that resolves to the multihash of the entry as a String.
    * @param data
    */
-  add(data:any): Promise<string>
+  add(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data:any
+  ): Promise<string>
 
   /**
    * Returns an Object with the contents of the entry.
@@ -25,5 +28,8 @@ export interface FeedStoreInstance extends StoreInstance {
   iterator: IteratorFunction
 }
 
-export const isFeedStoreInstance = (v:any): v is FeedStoreInstance => isStoreInstance(v)
+export const isFeedStoreInstance = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  v:any,
+): v is FeedStoreInstance => isStoreInstance(v)
   && v.type === 'feed';

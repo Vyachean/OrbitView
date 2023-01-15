@@ -15,5 +15,8 @@ export interface CounterStoreInstance extends StoreInstance {
   inc(value?:number): Promise<string>
 }
 
-export const isCounterStoreInstance = (v:any): v is CounterStoreInstance => isStoreInstance(v)
+export const isCounterStoreInstance = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  v:any,
+): v is CounterStoreInstance => isStoreInstance(v)
   && v.type === 'counter';

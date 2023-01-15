@@ -20,7 +20,10 @@ export const JsonInput:FunctionalComponent<QFieldProps> = (props:QFieldProps, ct
         mode: 'text',
         mainMenuBar: false,
         readOnly: !editable,
-        'onUpdate:modelValue': (v:any) => {
+        'onUpdate:modelValue': (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          v:any,
+        ) => {
           if (typeof v === 'string') {
             emitValue(JSON.parse(v));
           } else {

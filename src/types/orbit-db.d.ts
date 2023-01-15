@@ -169,9 +169,12 @@ export interface OrbitDBAddressInstance {
 export interface OrbitDBAddressConstructor {
   new (root:string, path:string): OrbitDBAddressInstance
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   isValid(address:any): boolean
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   parse(address:any):any
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   join(...paths:any[]): string
 }

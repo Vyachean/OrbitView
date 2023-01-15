@@ -24,20 +24,71 @@
           </h5>
           <div class="row gap-md q-mt-sm">
             <QToggle
-              label="allow everyone to write"
-              :model-value="everyoneIsAllowedToWrite"
-              @update:model-value="onAccessControllerAll"
-            />
-            <QToggle
-              label="allow me to write"
-              :model-value="imAllowedToWrite"
-              @update:model-value="onAllowMeToWrite"
-            />
-            <QToggle
               v-model="options.overwrite"
               label="Overwrite an existing database (Default: false)"
             />
           </div>
+          <QExpansionItem label="write access controller">
+            <QList separator>
+              <QItem>
+                <QItemSection side>
+                  <QToggle
+                    :model-value="everyoneIsAllowedToWrite"
+                    @update:model-value="onAccessControllerAll"
+                  />
+                </QItemSection>
+                <QItemSection>
+                  <QItemLabel>allow everyone to write</QItemLabel>
+                </QItemSection>
+              </QItem>
+              <QItem>
+                <QItemSection side>
+                  <QToggle
+                    :model-value="imAllowedToWrite"
+                    @update:model-value="onAllowMeToWrite"
+                  />
+                </QItemSection>
+                <QItemSection>
+                  <QItemLabel>allow me to write</QItemLabel>
+                </QItemSection>
+              </QItem>
+              <QItem
+                v-for="(id, i) in options.accessController.write"
+                :key="i"
+              >
+                <QItemSection>
+                  <QItemLabel>
+                    <QInput
+                      v-model="options.accessController.write[i]"
+                      type="text"
+                      :label="options.accessController.write[i] === myID?'my ID':'other peer ID'"
+                      :readonly="options.accessController.write[i] === myID"
+                    >
+                      <template #before>
+                        <QBtn
+                          icon="delete"
+                          flat
+                          fab
+                          @click="options.accessController.write.splice(i, 1)"
+                        />
+                      </template>
+                    </QInput>
+                  </QItemLabel>
+                </QItemSection>
+              </QItem>
+              <QItem>
+                <QItemSection>
+                  <QItemLabel>
+                    <QBtn
+                      icon="add"
+                      label="add id"
+                      @click="addWriteAccess"
+                    />
+                  </QItemLabel>
+                </QItemSection>
+              </QItem>
+            </QList>
+          </QExpansionItem>
           <QField
             v-model="modelMeta"
             type="textarea"
@@ -96,8 +147,11 @@ export default defineComponent({
 
     const name = ref<string>();
     const type = ref<DBType>();
-    const options = reactive<DBCreateOptions>({
+    const options = reactive<DBCreateOptions & {accessController:{write:string[]}} >({
       overwrite: false,
+      accessController: {
+        write: [],
+      },
     });
 
     const DBStorage = useDBStorage();
@@ -157,8 +211,10 @@ export default defineComponent({
         }
       }
     };
+
+    const myID = computed(() => identity.value?.id);
     const onAllowMeToWrite = (v:boolean) => {
-      const id = identity.value?.id;
+      const id = myID.value;
       if (!id) {
         return;
       }
@@ -180,6 +236,10 @@ export default defineComponent({
       && options.accessController?.write?.includes(identity.value.id)));
 
     const everyoneIsAllowedToWrite = computed(() => options.accessController?.write?.includes('*'));
+
+    const addWriteAccess = () => {
+      options.accessController.write.push('');
+    };
 
     return {
       create,
@@ -207,6 +267,8 @@ export default defineComponent({
       everyoneIsAllowedToWrite,
       imAllowedToWrite,
       onAllowMeToWrite,
+      myID,
+      addWriteAccess,
     };
   },
 });

@@ -43,7 +43,11 @@ export const useDBStorage = defineStore('DBStorage', () => {
       deserialize: (v) => {
         const obj = parse(v);
         if (obj?.list && obj.list instanceof Array) {
-          obj.list = obj.list.reduce((prev:ListDB, item: any) => {
+          obj.list = obj.list.reduce((
+            prev:ListDB,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            item: any,
+          ) => {
             if (item instanceof Array) {
               const objAddress = item[0];
               if (

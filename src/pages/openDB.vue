@@ -185,7 +185,10 @@ export default defineComponent({
 
     const pushEvents = eventNames.reduce((prev, name) => ({
       ...prev,
-      [name]: (...payload:any[]) => {
+      [name]: (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...payload:any[]
+      ) => {
         // eslint-disable-next-line no-console
         console.log('event', name, payload);
         eventLog.value.unshift({ name, payload });

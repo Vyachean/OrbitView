@@ -12,12 +12,11 @@ This can be used for testing and administering the contents of a database.
 - [x] View db for Keyvalue, Eventlog, Feed, Docstore, Counter
 - [x] Edit db for Keyvalue, Eventlog, Feed, Docstore, Counter
 - [x] grant private and public access
-- [ ] grant access to other peers
+- [x] grant access to other peers
 - [ ] change options for orbit-db
 - [ ] change options for ipfs
 - [ ] show options opened db
 - [ ] select ipfs node type
-
 
 ## Install the dependencies
 ```bash

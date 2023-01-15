@@ -29,5 +29,8 @@ export interface DocStoreInstance extends StoreInstance {
   del(key: string): Promise<string>
 }
 
-export const isDocStoreInstance = (v:any):v is DocStoreInstance => isStoreInstance(v)
+export const isDocStoreInstance = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  v:any,
+):v is DocStoreInstance => isStoreInstance(v)
   && v.type === 'docstore';

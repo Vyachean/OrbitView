@@ -117,6 +117,7 @@ export interface StoreInstance {
   readonly dbname: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isStoreInstance = (v:any): v is StoreInstance => v
   && typeof v === 'object'
   && 'load' in v && typeof v.load === 'function'

@@ -36,5 +36,6 @@ export interface KeyvalueStoreInstance extends StoreInstance {
 }
 
 export const isKeyvalueStoreInstance = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   v: any,
 ): v is KeyvalueStoreInstance => isStoreInstance(v) && v.type === 'keyvalue';
