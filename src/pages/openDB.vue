@@ -141,7 +141,7 @@ export default defineComponent({
         }
         const orbitdb = await instance.getOrbitDB();
 
-        const opened = await orbitdb.open(props.address);
+        const opened = await orbitdb.open(props.address, { timeout: 600e3 });
 
         db.value = opened;
         if (db.value) {

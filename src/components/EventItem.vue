@@ -49,7 +49,7 @@ export interface PropEventItem {
 export default defineComponent({
   components: { JsonEditorVue },
   props: {
-    value: Object as PropType<PropEventItem>,
+    event: Object as PropType<PropEventItem>,
   },
   setup() {
     const open = ref(false);

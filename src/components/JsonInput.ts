@@ -13,7 +13,7 @@ export const JsonInput:FunctionalComponent<QFieldProps> = (props:QFieldProps, ct
         floatingLabel, emitValue, modelValue, id, editable,
       }]: Parameters<QFieldSlots['control']>
     ) => floatingLabel && h(
-      [JsonEditorVue],
+      JsonEditorVue,
       {
         id,
         modelValue,

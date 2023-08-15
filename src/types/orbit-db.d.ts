@@ -57,6 +57,11 @@ interface DBOpenOptions {
    * Replicate the database with peers, requires IPFS PubSub. (Default: true)
    */
   replicate?: boolean
+
+  /**
+   * Не задокументированный таймаут загрузки базы
+   */
+  timeout?: number
 }
 
 export type Hash = string
@@ -100,26 +105,30 @@ export interface OrbitDBInstance {
    * Creates and opens a keyvalue database
    * Returns a Promise that resolves to a KeyValueStore instance.
    * @param nameOrAddress
+   * @param options
    */
-  keyvalue(nameOrAddress: string): Promise<KeyvalueStoreInstance>
+  keyvalue(nameOrAddress: string, options?: DBOpenOptions): Promise<KeyvalueStoreInstance>
 
   /**
    * Alias for keyvalue()
    * @param nameOrAddress
+   * @param options
    */
-  kvstore(nameOrAddress: string): Promise<KeyvalueStoreInstance>
+  kvstore(nameOrAddress: string, options?: DBOpenOptions): Promise<KeyvalueStoreInstance>
 
   /**
    * Creates and opens an eventlog database
    * @param nameOrAddress
+   * @param options
    */
-  log(nameOrAddress: string): Promise<EventStoreInstance>
+  log(nameOrAddress: string, options?: DBOpenOptions): Promise<EventStoreInstance>
 
   /**
    * Alias for log()
    * @param nameOrAddress
+   * @param options
    */
-  eventlog(nameOrAddress: string): Promise<EventStoreInstance>
+  eventlog(nameOrAddress: string, options?: DBOpenOptions): Promise<EventStoreInstance>
 
   readonly identity: IdentityInstance
 
